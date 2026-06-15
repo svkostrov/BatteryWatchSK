@@ -37,6 +37,23 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         )
     }
 
+    // MARK: - Complication Descriptors (watchOS 7+ replacement for CLKComplicationSupportedFamilies plist key)
+
+    func getComplicationDescriptors(handler: @escaping ([CLKComplicationDescriptor]) -> Void) {
+        let supported: [CLKComplicationFamily] = [
+            .graphicCorner, .graphicCircular, .graphicBezel, .graphicRectangular,
+            .extraLarge, .modularLarge, .modularSmall,
+            .utilitarianLarge, .utilitarianSmall, .circularSmall
+        ]
+        handler([
+            CLKComplicationDescriptor(
+                identifier: "BatteryWatchSK_iPhoneBattery",
+                displayName: "iPhone Battery",
+                supportedFamilies: supported
+            )
+        ])
+    }
+
     // MARK: - Timeline Configuration
 
     func getSupportedTimeTravelDirections(for complication: CLKComplication,
