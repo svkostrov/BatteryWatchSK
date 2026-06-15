@@ -1,6 +1,0 @@
-framework module Pods_BatteryWatchSK {
-  umbrella header "Pods-BatteryWatchSK-umbrella.h"
-
-  export *
-  module * { export * }
-}

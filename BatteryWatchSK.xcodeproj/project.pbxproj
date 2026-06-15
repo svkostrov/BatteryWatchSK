@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		14CE91E0BFF165F553219362 /* Pods_BatteryWatchSK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1ABB9B37FB80C7299D9C2F /* Pods_BatteryWatchSK.framework */; };
 		170FCC92235D05BF00180AD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FCC91235D05BF00180AD9 /* AppDelegate.swift */; };
 		170FCC94235D05BF00180AD9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FCC93235D05BF00180AD9 /* SceneDelegate.swift */; };
 		170FCC96235D05BF00180AD9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FCC95235D05BF00180AD9 /* ViewController.swift */; };
@@ -25,10 +24,6 @@
 		170FCCBF235D05C500180AD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 170FCCBE235D05C500180AD9 /* Assets.xcassets */; };
 		1718535F2375A7E40058777F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718535E2375A7E40058777F /* Model.swift */; };
 		178877F7235F444E009457DB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178877F6235F444E009457DB /* Model.swift */; };
-		17BE8543236C801E00B0189E /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17BE853B236C801200B0189E /* GoogleUtilities.framework */; };
-		17BE8544236C801E00B0189E /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17BE853C236C801700B0189E /* GoogleMobileAds.framework */; };
-		17BE8545236C801E00B0189E /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17BE853D236C801B00B0189E /* GoogleAppMeasurement.framework */; };
-		17BE8546236C801E00B0189E /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17BE8542236C801E00B0189E /* nanopb.framework */; };
 		CE4A264B258CAE1500D3F200 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE4A2649258CAE1500D3F200 /* Localizable.strings */; };
 		CE576D0025DDA93B001564BA /* ViewControllerHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE576CFF25DDA93B001564BA /* ViewControllerHelp.swift */; };
 /* End PBXBuildFile section */
@@ -73,16 +68,6 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		17BE8541236C801D00B0189E /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -108,16 +93,9 @@
 		170FCCC1235D05C500180AD9 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		1718535E2375A7E40058777F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		178877F6235F444E009457DB /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		17BE853B236C801200B0189E /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = "<group>"; };
-		17BE853C236C801700B0189E /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
-		17BE853D236C801B00B0189E /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAppMeasurement.framework; sourceTree = "<group>"; };
-		17BE8542236C801E00B0189E /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nanopb.framework; sourceTree = "<group>"; };
-		730F30BF0F8F43D58474949B /* Pods-BatteryWatchSK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BatteryWatchSK.release.xcconfig"; path = "Target Support Files/Pods-BatteryWatchSK/Pods-BatteryWatchSK.release.xcconfig"; sourceTree = "<group>"; };
-		AA1ABB9B37FB80C7299D9C2F /* Pods_BatteryWatchSK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BatteryWatchSK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE4A262B258CA46B00D3F200 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		CE4A264A258CAE1500D3F200 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE576CFF25DDA93B001564BA /* ViewControllerHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerHelp.swift; sourceTree = "<group>"; };
-		F1434E3B37985A27367ABAED /* Pods-BatteryWatchSK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BatteryWatchSK.debug.xcconfig"; path = "Target Support Files/Pods-BatteryWatchSK/Pods-BatteryWatchSK.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,11 +103,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17BE8543236C801E00B0189E /* GoogleUtilities.framework in Frameworks */,
-				17BE8545236C801E00B0189E /* GoogleAppMeasurement.framework in Frameworks */,
-				17BE8544236C801E00B0189E /* GoogleMobileAds.framework in Frameworks */,
-				17BE8546236C801E00B0189E /* nanopb.framework in Frameworks */,
-				14CE91E0BFF165F553219362 /* Pods_BatteryWatchSK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,11 +126,6 @@
 		00EB0D14244991EB5B381BC1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				17BE853D236C801B00B0189E /* GoogleAppMeasurement.framework */,
-				17BE853C236C801700B0189E /* GoogleMobileAds.framework */,
-				17BE853B236C801200B0189E /* GoogleUtilities.framework */,
-				17BE8542236C801E00B0189E /* nanopb.framework */,
-				AA1ABB9B37FB80C7299D9C2F /* Pods_BatteryWatchSK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -169,7 +137,6 @@
 				170FCCA6235D05C200180AD9 /* BatteryWatchSK WatchKit App */,
 				170FCCB5235D05C300180AD9 /* BatteryWatchSK WatchKit Extension */,
 				170FCC8F235D05BF00180AD9 /* Products */,
-				FDD39ADEBBF5E31A795C4A96 /* Pods */,
 				00EB0D14244991EB5B381BC1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -226,15 +193,6 @@
 			path = "BatteryWatchSK WatchKit Extension";
 			sourceTree = "<group>";
 		};
-		FDD39ADEBBF5E31A795C4A96 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F1434E3B37985A27367ABAED /* Pods-BatteryWatchSK.debug.xcconfig */,
-				730F30BF0F8F43D58474949B /* Pods-BatteryWatchSK.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -242,13 +200,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 170FCCCC235D05C500180AD9 /* Build configuration list for PBXNativeTarget "BatteryWatchSK" */;
 			buildPhases = (
-				8888383C5988B3ED26B5C6B1 /* [CP] Check Pods Manifest.lock */,
 				170FCC8A235D05BF00180AD9 /* Sources */,
 				170FCC8B235D05BF00180AD9 /* Frameworks */,
 				170FCC8C235D05BF00180AD9 /* Resources */,
 				170FCCCB235D05C500180AD9 /* Embed Watch Content */,
-				F5783729C962E62ABAE46A3A /* [CP] Embed Pods Frameworks */,
-				17BE8541236C801D00B0189E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -369,45 +324,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8888383C5988B3ED26B5C6B1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-BatteryWatchSK-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F5783729C962E62ABAE46A3A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BatteryWatchSK/Pods-BatteryWatchSK-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BatteryWatchSK/Pods-BatteryWatchSK-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BatteryWatchSK/Pods-BatteryWatchSK-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -699,7 +615,6 @@
 		};
 		170FCCCD235D05C500180AD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F1434E3B37985A27367ABAED /* Pods-BatteryWatchSK.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -726,7 +641,6 @@
 		};
 		170FCCCE235D05C500180AD9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 730F30BF0F8F43D58474949B /* Pods-BatteryWatchSK.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

@@ -1,8 +1,6 @@
-platform :ios, '9.0'
+platform :ios, '13.0'
 use_frameworks!
 
 target 'BatteryWatchSK' do
-pod 'Google-Mobile-Ads-SDK'
-
-
+  # Pods removed — AdMob больше не используется
 end
