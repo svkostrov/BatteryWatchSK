@@ -13,7 +13,6 @@ class Model: NSObject {
 
     // Заряд Apple Watch (in-memory, читается прямо с девайса)
     var batteryAW: Float = 1.0
-    var inc = 0
 
     // Заряд iPhone — персистентно через UserDefaults
     // Значение сохраняется между запусками extension (нужно для complications)

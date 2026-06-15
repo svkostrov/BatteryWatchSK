@@ -12,18 +12,17 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     // MARK: - Helpers
 
-    /// Цвет по уровню заряда: зелёный >50%, жёлтый 20-50%, красный <20%
+    /// Цвет по уровню заряда. Используем базовые UIColor — systemRed/systemYellow недоступны в watchOS.
     private func batteryColor(for level: Float) -> UIColor {
         if level > 0.5 { return .green }
-        if level > 0.2 { return .systemYellow }
-        return .systemRed
+        if level > 0.2 { return UIColor(red: 1.0, green: 0.8, blue: 0.0, alpha: 1.0) } // жёлтый
+        return .red
     }
 
-    /// Текст процента заряда, например "73%". Если данных нет — "--"
+    /// Текст процента заряда. "--" если данных ещё нет.
     private func batteryText() -> String {
         guard Model.shared.hasIPhoneData else { return "--" }
-        let pct = Int(Model.shared.iPhoneBattery * 100)
-        return "\(pct)%"
+        return "\(Int(Model.shared.iPhoneBattery * 100))%"
     }
 
     private func batteryFill() -> Float {
@@ -33,7 +32,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     // MARK: - Timeline Configuration
 
-    func getSupportedTimeTravelDirections(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimeTravelDirections) -> Void) {
+    func getSupportedTimeTravelDirections(for complication: CLKComplication,
+                                          withHandler handler: @escaping (CLKComplicationTimeTravelDirections) -> Void) {
         handler([])
     }
 
@@ -42,174 +42,121 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     }
 
     func getTimelineEndDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
-        var date = Calendar.current.startOfDay(for: Date())
-        date = Calendar.current.date(byAdding: .day, value: 9999, to: date)!
-        handler(date)
+        handler(Calendar.current.date(byAdding: .day, value: 9999, to: Calendar.current.startOfDay(for: Date()))!)
     }
 
-    func getPrivacyBehavior(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationPrivacyBehavior) -> Void) {
+    func getPrivacyBehavior(for complication: CLKComplication,
+                             withHandler handler: @escaping (CLKComplicationPrivacyBehavior) -> Void) {
         handler(.hideOnLockScreen)
     }
 
     // MARK: - Timeline Population
 
-    func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
-        let text = batteryText()
-        let fill = batteryFill()
-        let color = batteryColor(for: Model.shared.iPhoneBattery)
-
-        switch complication.family {
-
-        case .graphicCircular:
-            // Круглая complications с двумя строками: иконка + процент
-            let template = CLKComplicationTemplateGraphicCircularStackText()
-            template.line1TextProvider = CLKSimpleTextProvider(text: "📱")
-            template.line2TextProvider = CLKSimpleTextProvider(text: text)
-            let entry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
-            handler(entry)
-
-        case .graphicBezel:
-            // Круглая с текстом по дуге
-            let circularTemplate = CLKComplicationTemplateGraphicCircularStackText()
-            circularTemplate.line1TextProvider = CLKSimpleTextProvider(text: "📱")
-            circularTemplate.line2TextProvider = CLKSimpleTextProvider(text: text)
-            let template = CLKComplicationTemplateGraphicBezelCircularText()
-            template.circularTemplate = circularTemplate
-            template.textProvider = CLKSimpleTextProvider(text: "iPhone Battery")
-            let entry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
-            handler(entry)
-
-        case .extraLarge:
-            // Большая кольцевая с процентом
-            let template = CLKComplicationTemplateExtraLargeRingText()
-            template.textProvider = CLKSimpleTextProvider(text: text)
-            template.fillFraction = fill
-            template.ringStyle = .closed
-            template.tintColor = color
-            let entry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
-            handler(entry)
-
-        case .utilitarianSmall:
-            // Маленькая утилитарная: кольцо с процентом
-            let template = CLKComplicationTemplateUtilitarianSmallRingText()
-            template.textProvider = CLKSimpleTextProvider(text: text)
-            template.fillFraction = fill
-            template.ringStyle = .closed
-            template.tintColor = color
-            let entry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
-            handler(entry)
-
-        case .modularSmall:
-            // Модульная маленькая: кольцо с процентом
-            let template = CLKComplicationTemplateModularSmallRingText()
-            template.textProvider = CLKSimpleTextProvider(text: text)
-            template.fillFraction = fill
-            template.ringStyle = .closed
-            template.tintColor = color
-            let entry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
-            handler(entry)
-
-        case .circularSmall:
-            // Круговая маленькая: кольцо с процентом
-            let template = CLKComplicationTemplateCircularSmallRingText()
-            template.textProvider = CLKSimpleTextProvider(text: text)
-            template.fillFraction = fill
-            template.ringStyle = .closed
-            template.tintColor = color
-            let entry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
-            handler(entry)
-
-        case .utilitarianLarge:
-            // Широкая утилитарная: текст с иконкой и процентом
-            let template = CLKComplicationTemplateUtilitarianLargeFlat()
-            template.textProvider = CLKSimpleTextProvider(text: "📱 iPhone: \(text)")
-            let entry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
-            handler(entry)
-
-        case .modularLarge:
-            // Большая модульная: заголовок + данные
-            let template = CLKComplicationTemplateModularLargeStandardBody()
-            template.headerTextProvider = CLKSimpleTextProvider(text: "📱 iPhone Battery")
-            template.body1TextProvider = CLKSimpleTextProvider(text: text)
-            template.body2TextProvider = CLKSimpleTextProvider(text: Model.shared.iPhoneBatteryString)
-            let entry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
-            handler(entry)
-
-        default:
-            handler(nil)
-        }
+    func getCurrentTimelineEntry(for complication: CLKComplication,
+                                  withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
+        handler(makeEntry(for: complication.family, sampleMode: false))
     }
 
-    func getTimelineEntries(for complication: CLKComplication, before date: Date, limit: Int, withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
+    func getTimelineEntries(for complication: CLKComplication, before date: Date, limit: Int,
+                             withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
         handler(nil)
     }
 
-    func getTimelineEntries(for complication: CLKComplication, after date: Date, limit: Int, withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
+    func getTimelineEntries(for complication: CLKComplication, after date: Date, limit: Int,
+                             withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
         handler(nil)
     }
 
     // MARK: - Placeholder Templates
 
-    func getLocalizableSampleTemplate(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTemplate?) -> Void) {
-        switch complication.family {
+    func getLocalizableSampleTemplate(for complication: CLKComplication,
+                                       withHandler handler: @escaping (CLKComplicationTemplate?) -> Void) {
+        handler(makeEntry(for: complication.family, sampleMode: true)?.complicationTemplate)
+    }
+
+    // MARK: - Template Factory
+
+    /// Единый метод для создания шаблонов.
+    /// sampleMode=true — показываем фиктивные 85% для превью в настройках циферблата.
+    private func makeEntry(for family: CLKComplicationFamily, sampleMode: Bool) -> CLKComplicationTimelineEntry? {
+        let text   = sampleMode ? "85%" : batteryText()
+        let fill   = sampleMode ? Float(0.85) : batteryFill()
+        let color  = sampleMode ? UIColor.green : batteryColor(for: Model.shared.iPhoneBattery)
+        let now    = Date()
+
+        let template: CLKComplicationTemplate
+
+        switch family {
 
         case .graphicCircular:
-            let template = CLKComplicationTemplateGraphicCircularStackText()
-            template.line1TextProvider = CLKSimpleTextProvider(text: "📱")
-            template.line2TextProvider = CLKSimpleTextProvider(text: "85%")
-            handler(template)
+            // Два ряда текста: иконка и процент
+            template = CLKComplicationTemplateGraphicCircularStackText(
+                line1TextProvider: CLKSimpleTextProvider(text: "📱"),
+                line2TextProvider: CLKSimpleTextProvider(text: text)
+            )
 
         case .graphicBezel:
-            let circularTemplate = CLKComplicationTemplateGraphicCircularStackText()
-            circularTemplate.line1TextProvider = CLKSimpleTextProvider(text: "📱")
-            circularTemplate.line2TextProvider = CLKSimpleTextProvider(text: "85%")
-            let template = CLKComplicationTemplateGraphicBezelCircularText()
-            template.circularTemplate = circularTemplate
-            template.textProvider = CLKSimpleTextProvider(text: "iPhone Battery")
-            handler(template)
+            let inner = CLKComplicationTemplateGraphicCircularStackText(
+                line1TextProvider: CLKSimpleTextProvider(text: "📱"),
+                line2TextProvider: CLKSimpleTextProvider(text: text)
+            )
+            template = CLKComplicationTemplateGraphicBezelCircularText(
+                circularTemplate: inner,
+                textProvider: CLKSimpleTextProvider(text: "iPhone Battery")
+            )
 
         case .extraLarge:
-            let template = CLKComplicationTemplateExtraLargeRingText()
-            template.textProvider = CLKSimpleTextProvider(text: "85%")
-            template.fillFraction = 0.85
-            template.ringStyle = .closed
-            handler(template)
+            let t = CLKComplicationTemplateExtraLargeRingText(
+                textProvider: CLKSimpleTextProvider(text: text),
+                fillFraction: fill,
+                ringStyle: .closed
+            )
+            t.tintColor = color
+            template = t
 
         case .utilitarianSmall:
-            let template = CLKComplicationTemplateUtilitarianSmallRingText()
-            template.textProvider = CLKSimpleTextProvider(text: "85%")
-            template.fillFraction = 0.85
-            template.ringStyle = .closed
-            handler(template)
+            let t = CLKComplicationTemplateUtilitarianSmallRingText(
+                textProvider: CLKSimpleTextProvider(text: text),
+                fillFraction: fill,
+                ringStyle: .closed
+            )
+            t.tintColor = color
+            template = t
 
         case .modularSmall:
-            let template = CLKComplicationTemplateModularSmallRingText()
-            template.textProvider = CLKSimpleTextProvider(text: "85%")
-            template.fillFraction = 0.85
-            template.ringStyle = .closed
-            handler(template)
+            let t = CLKComplicationTemplateModularSmallRingText(
+                textProvider: CLKSimpleTextProvider(text: text),
+                fillFraction: fill,
+                ringStyle: .closed
+            )
+            t.tintColor = color
+            template = t
 
         case .circularSmall:
-            let template = CLKComplicationTemplateCircularSmallRingText()
-            template.textProvider = CLKSimpleTextProvider(text: "85%")
-            template.fillFraction = 0.85
-            template.ringStyle = .closed
-            handler(template)
+            let t = CLKComplicationTemplateCircularSmallRingText(
+                textProvider: CLKSimpleTextProvider(text: text),
+                fillFraction: fill,
+                ringStyle: .closed
+            )
+            t.tintColor = color
+            template = t
 
         case .utilitarianLarge:
-            let template = CLKComplicationTemplateUtilitarianLargeFlat()
-            template.textProvider = CLKSimpleTextProvider(text: "📱 iPhone: 85%")
-            handler(template)
+            template = CLKComplicationTemplateUtilitarianLargeFlat(
+                textProvider: CLKSimpleTextProvider(text: "📱 iPhone: \(text)")
+            )
 
         case .modularLarge:
-            let template = CLKComplicationTemplateModularLargeStandardBody()
-            template.headerTextProvider = CLKSimpleTextProvider(text: "📱 iPhone Battery")
-            template.body1TextProvider = CLKSimpleTextProvider(text: "85%")
-            template.body2TextProvider = CLKSimpleTextProvider(text: "📱iPhone: 85%🔋")
-            handler(template)
+            template = CLKComplicationTemplateModularLargeStandardBody(
+                headerTextProvider: CLKSimpleTextProvider(text: "📱 iPhone Battery"),
+                body1TextProvider: CLKSimpleTextProvider(text: text),
+                body2TextProvider: CLKSimpleTextProvider(text: sampleMode ? "📱iPhone: 85%🔋" : Model.shared.iPhoneBatteryString)
+            )
 
         default:
-            handler(nil)
+            return nil
         }
+
+        return CLKComplicationTimelineEntry(date: now, complicationTemplate: template)
     }
 }

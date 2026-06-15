@@ -19,9 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         
         let icon = UIApplicationShortcutIcon(type: .cloud)
-         //let item = UIApplicationShortcutItem(type: "com.yoursite.yourapp.adduser", localizedTitle: Model.shared.iphoneCurrentBattery(), localizedSubtitle: Model.shared.LastAW, icon: icon , userInfo: nil)
-        let item = UIApplicationShortcutItem(type: "com.yoursite.yourapp.adduser", localizedTitle: "📱🙂⌚️", localizedSubtitle: Model.shared.LastAW, icon: icon , userInfo: nil)
-        print("ХЕРНЯ ", Model.shared.LastAW)
+        let item = UIApplicationShortcutItem(type: "com.yoursite.yourapp.adduser", localizedTitle: "📱🙂⌚️", localizedSubtitle: Model.shared.LastAW, icon: icon, userInfo: nil)
         UIApplication.shared.shortcutItems = [item]
         
         return true

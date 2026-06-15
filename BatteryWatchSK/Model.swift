@@ -9,19 +9,8 @@
 import UIKit
 
 class Model: NSObject {
-static let shared = Model()
-    var LastAW:String = ""
+    static let shared = Model()
 
-    
-    func iphoneCurrentBattery() -> String{
-        UIDevice.current.isBatteryMonitoringEnabled = true
-        let batteryLevel = UIDevice.current.batteryLevel
-        UIDevice.current.isBatteryMonitoringEnabled = false
-        let bat = "📱iPhone: " + String(format: "%.0f", Float(batteryLevel * 100)) + "%🔋"
-        return bat
-    }
-    
-    
-    
-    
+    // Последнее известное состояние Apple Watch (строка от Watch-приложения)
+    var LastAW: String = ""
 }

@@ -8,7 +8,6 @@
 import UIKit
 import GoogleMobileAds
 import WatchConnectivity
-import AudioToolbox
 
 class ViewController: UIViewController, WCSessionDelegate, GADBannerViewDelegate, GADInterstitialDelegate {
 
@@ -18,8 +17,6 @@ class ViewController: UIViewController, WCSessionDelegate, GADBannerViewDelegate
     var session: WCSession!
     var IphoneBatteryLevelString: String = ""
     var IphoneBatteryLevel: Float = 0.0
-    var lastMessage: CFAbsoluteTime = 0
-    var i = 0
 
     let ADMOB_APP_ID = "ca-app-pub-3377014316093239~5915687800"
     let ADMOB_Banner = "ca-app-pub-3377014316093239/1210156036"
