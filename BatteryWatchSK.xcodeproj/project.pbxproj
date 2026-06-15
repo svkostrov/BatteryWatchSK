@@ -622,7 +622,6 @@
 				DEVELOPMENT_TEAM = 85UAW96Q68;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/BatteryWatchSK/Licenses",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = BatteryWatchSK/Info.plist;
@@ -648,7 +647,6 @@
 				DEVELOPMENT_TEAM = 85UAW96Q68;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/BatteryWatchSK/Licenses",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = BatteryWatchSK/Info.plist;
