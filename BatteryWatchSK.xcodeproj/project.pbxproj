@@ -26,6 +26,7 @@
 		178877F7235F444E009457DB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178877F6235F444E009457DB /* Model.swift */; };
 		CE4A264B258CAE1500D3F200 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE4A2649258CAE1500D3F200 /* Localizable.strings */; };
 		CE576D0025DDA93B001564BA /* ViewControllerHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE576CFF25DDA93B001564BA /* ViewControllerHelp.swift */; };
+		AA11223344556677889900BB /* BackgroundSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11223344556677889900AA /* BackgroundSessionService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		170FCC91235D05BF00180AD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		170FCC93235D05BF00180AD9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		170FCC95235D05BF00180AD9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AA11223344556677889900AA /* BackgroundSessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSessionService.swift; sourceTree = "<group>"; };
 		170FCC98235D05BF00180AD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		170FCC9A235D05C100180AD9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		170FCC9D235D05C100180AD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				170FCC91235D05BF00180AD9 /* AppDelegate.swift */,
+				AA11223344556677889900AA /* BackgroundSessionService.swift */,
 				1718535E2375A7E40058777F /* Model.swift */,
 				170FCC93235D05BF00180AD9 /* SceneDelegate.swift */,
 				170FCC95235D05BF00180AD9 /* ViewController.swift */,
@@ -333,6 +336,7 @@
 			files = (
 				170FCC96235D05BF00180AD9 /* ViewController.swift in Sources */,
 				170FCC92235D05BF00180AD9 /* AppDelegate.swift in Sources */,
+				AA11223344556677889900BB /* BackgroundSessionService.swift in Sources */,
 				170FCC94235D05BF00180AD9 /* SceneDelegate.swift in Sources */,
 				1718535F2375A7E40058777F /* Model.swift in Sources */,
 				CE576D0025DDA93B001564BA /* ViewControllerHelp.swift in Sources */,
