@@ -12,7 +12,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     // MARK: - Helpers
 
-    /// Цвет по уровню заряда. Используем базовые UIColor — systemRed/systemYellow недоступны в watchOS.
+    /// Цвет индикатора по уровню заряда.
+    /// Примечание: systemRed/systemYellow недоступны в watchOS — используем базовые UIColor.
     private func batteryColor(for level: Float) -> UIColor {
         if level > 0.5 { return .green }
         if level > 0.2 { return UIColor(red: 1.0, green: 0.8, blue: 0.0, alpha: 1.0) }
@@ -75,6 +76,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     // MARK: - Template Factory
 
+    /// Единая фабрика шаблонов.
+    /// sampleMode=true — показывать 85% в превью настроек циферблата.
     private func makeEntry(for family: CLKComplicationFamily, sampleMode: Bool) -> CLKComplicationTimelineEntry? {
         let text  = sampleMode ? "85%" : batteryText()
         let fill  = sampleMode ? Float(0.85) : batteryFill()
@@ -85,63 +88,70 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         switch family {
 
         case .graphicCircular:
-            let t = CLKComplicationTemplateGraphicCircularStackText()
-            t.line1TextProvider = CLKSimpleTextProvider(text: "📱")
-            t.line2TextProvider = CLKSimpleTextProvider(text: text)
-            template = t
+            template = CLKComplicationTemplateGraphicCircularStackText(
+                line1TextProvider: CLKSimpleTextProvider(text: "📱"),
+                line2TextProvider: CLKSimpleTextProvider(text: text)
+            )
 
         case .graphicBezel:
-            let inner = CLKComplicationTemplateGraphicCircularStackText()
-            inner.line1TextProvider = CLKSimpleTextProvider(text: "📱")
-            inner.line2TextProvider = CLKSimpleTextProvider(text: text)
-            let t = CLKComplicationTemplateGraphicBezelCircularText()
-            t.circularTemplate = inner
-            t.textProvider = CLKSimpleTextProvider(text: "iPhone Battery")
-            template = t
+            let inner = CLKComplicationTemplateGraphicCircularStackText(
+                line1TextProvider: CLKSimpleTextProvider(text: "📱"),
+                line2TextProvider: CLKSimpleTextProvider(text: text)
+            )
+            template = CLKComplicationTemplateGraphicBezelCircularText(
+                circularTemplate: inner,
+                textProvider: CLKSimpleTextProvider(text: "iPhone Battery")
+            )
 
         case .extraLarge:
-            let t = CLKComplicationTemplateExtraLargeRingText()
-            t.textProvider = CLKSimpleTextProvider(text: text)
-            t.fillFraction = fill
-            t.ringStyle = .closed
+            let t = CLKComplicationTemplateExtraLargeRingText(
+                textProvider: CLKSimpleTextProvider(text: text),
+                fillFraction: fill,
+                ringStyle: .closed
+            )
             t.tintColor = color
             template = t
 
         case .utilitarianSmall:
-            let t = CLKComplicationTemplateUtilitarianSmallRingText()
-            t.textProvider = CLKSimpleTextProvider(text: text)
-            t.fillFraction = fill
-            t.ringStyle = .closed
+            let t = CLKComplicationTemplateUtilitarianSmallRingText(
+                textProvider: CLKSimpleTextProvider(text: text),
+                fillFraction: fill,
+                ringStyle: .closed
+            )
             t.tintColor = color
             template = t
 
         case .modularSmall:
-            let t = CLKComplicationTemplateModularSmallRingText()
-            t.textProvider = CLKSimpleTextProvider(text: text)
-            t.fillFraction = fill
-            t.ringStyle = .closed
+            let t = CLKComplicationTemplateModularSmallRingText(
+                textProvider: CLKSimpleTextProvider(text: text),
+                fillFraction: fill,
+                ringStyle: .closed
+            )
             t.tintColor = color
             template = t
 
         case .circularSmall:
-            let t = CLKComplicationTemplateCircularSmallRingText()
-            t.textProvider = CLKSimpleTextProvider(text: text)
-            t.fillFraction = fill
-            t.ringStyle = .closed
+            let t = CLKComplicationTemplateCircularSmallRingText(
+                textProvider: CLKSimpleTextProvider(text: text),
+                fillFraction: fill,
+                ringStyle: .closed
+            )
             t.tintColor = color
             template = t
 
         case .utilitarianLarge:
-            let t = CLKComplicationTemplateUtilitarianLargeFlat()
-            t.textProvider = CLKSimpleTextProvider(text: "📱 iPhone: \(text)")
-            template = t
+            template = CLKComplicationTemplateUtilitarianLargeFlat(
+                textProvider: CLKSimpleTextProvider(text: "📱 iPhone: \(text)")
+            )
 
         case .modularLarge:
-            let t = CLKComplicationTemplateModularLargeStandardBody()
-            t.headerTextProvider = CLKSimpleTextProvider(text: "📱 iPhone Battery")
-            t.body1TextProvider = CLKSimpleTextProvider(text: text)
-            t.body2TextProvider = CLKSimpleTextProvider(text: sampleMode ? "📱iPhone: 85%🔋" : Model.shared.iPhoneBatteryString)
-            template = t
+            template = CLKComplicationTemplateModularLargeStandardBody(
+                headerTextProvider: CLKSimpleTextProvider(text: "📱 iPhone Battery"),
+                body1TextProvider: CLKSimpleTextProvider(text: text),
+                body2TextProvider: CLKSimpleTextProvider(
+                    text: sampleMode ? "📱iPhone: 85%🔋" : Model.shared.iPhoneBatteryString
+                )
+            )
 
         default:
             return nil
