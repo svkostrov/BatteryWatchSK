@@ -167,13 +167,9 @@ class ViewController: UIViewController, WCSessionDelegate, GADBannerViewDelegate
     func addBannerViewToView(_ bannerView: GADBannerView) {
         bannerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(bannerView)
-        view.addConstraints([
-            NSLayoutConstraint(item: bannerView, attribute: .bottom, relatedBy: .equal,
-                               toItem: bottomLayoutGuide, attribute: .top,
-                               multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: bannerView, attribute: .centerX, relatedBy: .equal,
-                               toItem: view, attribute: .centerX,
-                               multiplier: 1, constant: 0)
+        NSLayoutConstraint.activate([
+            bannerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bannerView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 }
