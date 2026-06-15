@@ -50,14 +50,21 @@ class ViewController: UIViewController, WCSessionDelegate {
         }
     }
 
+    /// Читаем текущий заряд. isBatteryMonitoringEnabled включён в viewDidLoad и остаётся включённым.
     func iphoneCurrentBattery() {
-        UIDevice.current.isBatteryMonitoringEnabled = true
-        IphoneBatteryLevel = UIDevice.current.batteryLevel
-        IphoneBatteryLevelString = "📱iPhone: " + String(format: "%.0f", Float(IphoneBatteryLevel * 100)) + "%" + updateBatteryStateLabel()
-        UIDevice.current.isBatteryMonitoringEnabled = false
+        let level = UIDevice.current.batteryLevel
+        guard level >= 0 else { return }  // -1.0 если мониторинг отключён
+        IphoneBatteryLevel = level
+        IphoneBatteryLevelString = "📱iPhone: " + String(format: "%.0f", level * 100) + "%" + updateBatteryStateLabel()
         DispatchQueue.main.async {
             self.label1.text = self.IphoneBatteryLevelString
         }
+    }
+
+    /// Вызывается автоматически при изменении заряда или состояния зарядки.
+    @objc func batteryLevelDidChange() {
+        iphoneCurrentBattery()
+        sendWatchMessage()
     }
 
     // MARK: - Send to Watch
@@ -93,6 +100,23 @@ class ViewController: UIViewController, WCSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .dark
+
+        // Включаем мониторинг один раз — оставляем включённым на время жизни VC.
+        // Это позволяет получать актуальные значения и события об изменении заряда.
+        UIDevice.current.isBatteryMonitoringEnabled = true
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(batteryLevelDidChange),
+            name: UIDevice.batteryLevelDidChangeNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(batteryLevelDidChange),
+            name: UIDevice.batteryStateDidChangeNotification,
+            object: nil
+        )
+
         iphoneCurrentBattery()
 
         if WCSession.isSupported() {
@@ -109,5 +133,10 @@ class ViewController: UIViewController, WCSessionDelegate {
         super.viewDidAppear(animated)
         iphoneCurrentBattery()
         sendWatchMessage()
+    }
+
+    deinit {
+        UIDevice.current.isBatteryMonitoringEnabled = false
+        NotificationCenter.default.removeObserver(self)
     }
 }

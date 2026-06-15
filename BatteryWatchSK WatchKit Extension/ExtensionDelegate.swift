@@ -10,12 +10,19 @@ import WatchKit
 import WatchConnectivity
 import ClockKit
 
+// Уведомление для InterfaceController: пришли новые данные от iPhone.
+extension Notification.Name {
+    static let iPhoneDataUpdated = Notification.Name("iPhoneDataUpdated")
+}
+
 class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
 
+    /// Задача WatchConnectivity из фона — держим ссылку до получения данных.
+    private var pendingConnectivityTask: WKWatchConnectivityRefreshBackgroundTask?
+
     func applicationDidFinishLaunching() {
-        // Запускаем WCSession на уровне ExtensionDelegate — это позволяет
-        // получать обновления от iPhone даже когда Watch-приложение закрыто,
-        // что критично для обновления complications в фоне.
+        // ExtensionDelegate — ЕДИНСТВЕННЫЙ делегат WCSession.
+        // InterfaceController НЕ перехватывает делегат; он слушает уведомление .iPhoneDataUpdated.
         if WCSession.isSupported() {
             let session = WCSession.default
             session.delegate = self
@@ -31,29 +38,32 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
 
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) { }
 
-    /// Получение application context от iPhone — работает в фоне, идеально для complications.
-    /// iPhone вызывает updateApplicationContext, Watch получает его даже когда оба приложения закрыты.
+    /// Получение application context от iPhone — приходит в фоне, основной канал для complications.
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
-        if let batteryLevel = applicationContext["iPhoneBattery"] as? Float {
-            Model.shared.iPhoneBattery = batteryLevel
-        }
-        if let batteryString = applicationContext["iPhoneBatteryString"] as? String {
-            Model.shared.iPhoneBatteryString = batteryString
-        }
-        DispatchQueue.main.async {
-            self.reloadComplications()
-        }
+        applyiPhoneData(applicationContext)
+        // Завершаем фоновую connectivity-задачу, если она ждала этих данных.
+        pendingConnectivityTask?.setTaskCompletedWithSnapshot(false)
+        pendingConnectivityTask = nil
     }
 
-    /// Получение прямого сообщения от iPhone (когда оба приложения активны).
+    /// Получение прямого сообщения (оба приложения активны).
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        if let batteryLevel = message["iPhoneBattery"] as? Float {
+        applyiPhoneData(message)
+    }
+
+    // MARK: - Data processing
+
+    private func applyiPhoneData(_ data: [String: Any]) {
+        if let batteryLevel = data["iPhoneBattery"] as? Float {
             Model.shared.iPhoneBattery = batteryLevel
         }
-        if let batteryString = message["iPhoneBatteryString"] as? String {
+        if let batteryString = data["iPhoneBatteryString"] as? String {
             Model.shared.iPhoneBatteryString = batteryString
+        } else if let legacyMessage = data["message"] as? String {
+            Model.shared.iPhoneBatteryString = legacyMessage
         }
         DispatchQueue.main.async {
+            NotificationCenter.default.post(name: .iPhoneDataUpdated, object: nil)
             self.reloadComplications()
         }
     }
@@ -61,11 +71,11 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
     // MARK: - Complications
 
     func reloadComplications() {
-        if let complications = CLKComplicationServer.sharedInstance().activeComplications {
-            for complication in complications {
-                CLKComplicationServer.sharedInstance().reloadTimeline(for: complication)
-                print("🔄 Complication reloaded: \(complication.family)")
-            }
+        guard let complications = CLKComplicationServer.sharedInstance().activeComplications,
+              !complications.isEmpty else { return }
+        for complication in complications {
+            CLKComplicationServer.sharedInstance().reloadTimeline(for: complication)
+            print("🔄 Complication reloaded: \(complication.family)")
         }
     }
 
@@ -74,13 +84,23 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
         for task in backgroundTasks {
             switch task {
+
+            case let connectivityTask as WKWatchConnectivityRefreshBackgroundTask:
+                // Держим задачу незавершённой: она закроется в didReceiveApplicationContext
+                // после того как WCSession доставит ожидающий applicationContext.
+                // Страховка: если didReceiveApplicationContext не придёт за 5 с — завершаем сами.
+                pendingConnectivityTask = connectivityTask
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
+                    guard let self = self, self.pendingConnectivityTask != nil else { return }
+                    self.pendingConnectivityTask?.setTaskCompletedWithSnapshot(false)
+                    self.pendingConnectivityTask = nil
+                }
+
             case let backgroundTask as WKApplicationRefreshBackgroundTask:
-                // Перезагружаем complications при каждом фоновом обновлении
                 reloadComplications()
-                // Планируем следующее обновление через 15 минут
-                let nextRefresh = Date().addingTimeInterval(15 * 60)
+                // Планируем следующее фоновое обновление через 15 минут
                 WKExtension.shared().scheduleBackgroundRefresh(
-                    withPreferredDate: nextRefresh,
+                    withPreferredDate: Date().addingTimeInterval(15 * 60),
                     userInfo: nil
                 ) { error in
                     if let error = error {
@@ -95,8 +115,6 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
                     estimatedSnapshotExpiration: Date.distantFuture,
                     userInfo: nil
                 )
-            case let connectivityTask as WKWatchConnectivityRefreshBackgroundTask:
-                connectivityTask.setTaskCompletedWithSnapshot(false)
             case let urlSessionTask as WKURLSessionRefreshBackgroundTask:
                 urlSessionTask.setTaskCompletedWithSnapshot(false)
             case let relevantShortcutTask as WKRelevantShortcutRefreshBackgroundTask:
