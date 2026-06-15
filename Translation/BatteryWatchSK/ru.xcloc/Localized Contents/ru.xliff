@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="BatteryWatchSK WatchKit App/Base.lproj/Interface.storyboard" datatype="plaintext" source-language="en" target-language="ru">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="12.4" build-num="12D4e"/>
+    </header>
+    <body>
+      <trans-unit id="3xt-g4-B8V.text" xml:space="preserve">
+        <source>Be happy!</source>
+        <note>Class = "WKInterfaceLabel"; text = "Be happy!"; ObjectID = "3xt-g4-B8V";</note>
+      </trans-unit>
+      <trans-unit id="A9h-2w-hZ2.text" xml:space="preserve">
+        <source>Debug</source>
+        <note>Class = "WKInterfaceLabel"; text = "Debug"; ObjectID = "A9h-2w-hZ2";</note>
+      </trans-unit>
+      <trans-unit id="IdU-wH-bcW.text" xml:space="preserve">
+        <source>Alert Label</source>
+        <note>Class = "WKInterfaceLabel"; text = "Alert Label"; ObjectID = "IdU-wH-bcW";</note>
+      </trans-unit>
+      <trans-unit id="OBO-TE-kYU.text" xml:space="preserve">
+        <source>Don't worry!</source>
+        <note>Class = "WKInterfaceLabel"; text = "Don't worry!"; ObjectID = "OBO-TE-kYU";</note>
+      </trans-unit>
+      <trans-unit id="QLM-CG-daK.text" xml:space="preserve">
+        <source>⌚️AW level</source>
+        <note>Class = "WKInterfaceLabel"; text = "⌚️AW level"; ObjectID = "QLM-CG-daK";</note>
+      </trans-unit>
+      <trans-unit id="Rf0-6h-p5u.text" xml:space="preserve">
+        <source>📱iPhone level</source>
+        <note>Class = "WKInterfaceLabel"; text = "📱iPhone level"; ObjectID = "Rf0-6h-p5u";</note>
+      </trans-unit>
+      <trans-unit id="hZM-Xj-aAV.title" xml:space="preserve">
+        <source>📲Update</source>
+        <note>Class = "WKInterfaceButton"; title = "📲Update"; ObjectID = "hZM-Xj-aAV";</note>
+      </trans-unit>
+      <trans-unit id="sXQ-90-Ysm.text" xml:space="preserve">
+        <source>⌛️Sync in progress</source>
+        <note>Class = "WKInterfaceLabel"; text = "⌛️Sync in progress"; ObjectID = "sXQ-90-Ysm";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="BatteryWatchSK WatchKit Extension/en.lproj/InfoPlist.strings" datatype="plaintext" source-language="en" target-language="ru">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="12.4" build-num="12D4e"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleDisplayName" xml:space="preserve">
+        <source>BatteryWatchSK</source>
+        <note>Bundle display name</note>
+      </trans-unit>
+      <trans-unit id="CFBundleName" xml:space="preserve">
+        <source>BatteryWatchSK WatchKit Extension</source>
+        <note>Bundle name</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="BatteryWatchSK/Base.lproj/Main.storyboard" source-language="en" target-language="ru" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="12.4" build-num="12D4e"/>
+    </header>
+    <body>
+      <trans-unit id="8fj-uY-79b.normalTitle" xml:space="preserve">
+        <source>Back</source>
+	<target>Назад</target>
+        <note>Class = "UIButton"; normalTitle = "Back"; ObjectID = "8fj-uY-79b";</note>
+      </trans-unit>
+      <trans-unit id="28y-ZV-Tql.normalTitle" xml:space="preserve">
+        <source>⌚️Update Sync</source>
+        <target>⌚️Update Sync</target>
+        <note>Class = "UIButton"; normalTitle = "⌚️Update Sync"; ObjectID = "28y-ZV-Tql";</note>
+      </trans-unit>
+      <trans-unit id="J0O-pt-mNS.text" xml:space="preserve">
+        <source>Apple Watch supported firmware version: 6.0 or higher.
+Supported IOS version: 13 or higher.
+
+Make sure the application has loaded on your Apple Watch.
+
+Sessions establishing between iPhone and Apple Watch takes some time. Session works short time to save battery.
+
+ You can add extension to your watchface in to corner. Just customize your clockface and find BatteryWatchSK
+
+ If you see:
+Sync ❌ - press button 📲Update on your Apple Watch to be Sync ✅
+
+No active widgets👀 - You have no active extension on your watchface. Just add BatteryWatch extension on your watchface.
+</source>
+        <target>Поддерживаемая версия ПО Apple Watch: 6.0 или новее.
+Поддерживаемая версия IOS: 13 или новее.
+
+Для корректной работы удостоверьтесь, что приложение полностью загружено и установлено на ваши Apple Watch.
+Синхронизация данных между iPhone и Apple Watch в рамках приложения занимает некоторое время. Для экономии энергии синхронизация данных происходит только когда вы смотрите в приложение на Apple Watch.
+Для удобства вы можете добавить виджет на ваш циферблат. Поддерживаются не все циферблаты.
+
+Если вы видите:
+Sync ❌ - нажмите кнопку "📲Update" в приложении на Apple Watch до появления статуса "Sync✅"
+No active widgets👀 - У вас нет активных виджетов на циферблате. Просто добавьте их в настройках циферблата. 
+</target>
+        <note>Class = "UILabel"; text = "Apple Watch supported firmware version: 6.0 or higher.\nSupported IOS version: 13 or higher.\n\nMake sure the application has loaded on your Apple Watch.\n\nSessions establishing between iPhone and Apple Watch takes some time. Session works short time to save battery.\n\n You can add extension to your watchface in to corner. Just customize your clockface and find BatteryWatchSK\n\n If you see:\nSync ❌ - press button 📲Update on your Apple Watch to be Sync ✅\n\nNo active widgets👀 - You have no active extension on your watchface. Just add BatteryWatch extension on your watchface.\n"; ObjectID = "J0O-pt-mNS";</note>
+      </trans-unit>
+      <trans-unit id="L0b-cS-omN.normalTitle" xml:space="preserve">
+        <source>Help❓</source>
+        <target>Помощь❓</target>
+        <note>Class = "UIButton"; normalTitle = "Help❓"; ObjectID = "L0b-cS-omN";</note>
+      </trans-unit>
+      <trans-unit id="kIg-Sz-7C3.text" xml:space="preserve">
+        <source>⌛️Sync in progress</source>
+        <target>⌛️Синхронизация...</target>
+        <note>Class = "UILabel"; text = "⌛️Sync in progress"; ObjectID = "kIg-Sz-7C3";</note>
+      </trans-unit>
+      <trans-unit id="l4E-4j-gL2.text" xml:space="preserve">
+        <source>📱iPhone power level</source>
+        <target>📱Уровень заряда на iPhone</target>
+        <note>Class = "UILabel"; text = "📱iPhone power level"; ObjectID = "l4E-4j-gL2";</note>
+      </trans-unit>
+      <trans-unit id="xmS-pV-dgZ.text" xml:space="preserve">
+        <source>Debug</source>
+        <target>Debug</target>
+        <note>Class = "UILabel"; text = "Debug"; ObjectID = "xmS-pV-dgZ";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="BatteryWatchSK/en.lproj/InfoPlist.strings" datatype="plaintext" source-language="en" target-language="ru">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="12.4" build-num="12D4e"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName" xml:space="preserve">
+        <source>BatteryWatchSK</source>
+        <note>Bundle name</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="BatteryWatchSK/en.lproj/Localizable.strings" source-language="en" target-language="ru" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="12.4" build-num="12D4e"/>
+    </header>
+    <body>
+      <trans-unit id="Sync ❌ -&gt; Please open App on your Apple Watch" xml:space="preserve">
+        <source>Sync ❌ -&gt; Please open App on your Apple Watch</source>
+        <target>Пожалуйста, откройте приложение на ваших Apple Watch</target>
+        <note>Please open App on your Apple Watch</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

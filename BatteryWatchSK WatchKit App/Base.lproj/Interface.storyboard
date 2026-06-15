@@ -1,16 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14256" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="17701" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc" pageOrientation="vertical">
+    <device id="watch44"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14243"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14219"/>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="17500"/>
     </dependencies>
     <scenes>
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModuleProvider="target"/>
+                <controller animationDuration="2" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="BatteryWatchSK_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <label width="1" alignment="center" text="📱iPhone level" textAlignment="center" id="Rf0-6h-p5u"/>
+                        <label width="1" alignment="center" text="⌚️AW level" textAlignment="center" id="QLM-CG-daK"/>
+                        <label width="1" alignment="center" text="⌛️Sync in progress" textAlignment="center" minimumScaleFactor="0.69999999999999996" id="sXQ-90-Ysm"/>
+                        <label width="136" height="20" alignment="left" hidden="YES" text="Debug" textAlignment="center" id="A9h-2w-hZ2">
+                            <fontDescription key="font" type="system" pointSize="7"/>
+                        </label>
+                        <label width="132" alignment="left" text="Don't worry!" textAlignment="center" id="OBO-TE-kYU">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </label>
+                        <label width="136" alignment="left" text="Be happy!" textAlignment="center" id="3xt-g4-B8V">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </label>
+                        <button width="1" height="53" alignment="center" title="📲Update" id="hZM-Xj-aAV">
+                            <connections>
+                                <action selector="hideWelcomeText" destination="AgC-eL-Hgc" id="yy0-Vc-7mJ"/>
+                            </connections>
+                        </button>
+                        <label width="136" alignment="left" verticalAlignment="center" text=" " textAlignment="center" id="7va-AE-HSu"/>
+                        <label width="136" alignment="center" verticalAlignment="center" text="Version" textAlignment="center" id="HLk-wN-4Rl"/>
+                    </items>
+                    <connections>
+                        <outlet property="VersionLabel" destination="HLk-wN-4Rl" id="dyb-i4-GOE"/>
+                        <outlet property="debugLabel" destination="A9h-2w-hZ2" id="bjY-bF-JdH"/>
+                        <outlet property="hideButton" destination="hZM-Xj-aAV" id="6Pc-0V-m1K"/>
+                        <outlet property="l2" destination="sXQ-90-Ysm" id="5TF-Fy-cEB"/>
+                        <outlet property="labAW" destination="QLM-CG-daK" id="Rsj-km-j7J"/>
+                        <outlet property="welcomeText" destination="Rf0-6h-p5u" id="8t5-ge-0Cc"/>
+                    </connections>
+                </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="345"/>
+            <point key="canvasLocation" x="219.52173913043478" y="344.17410714285717"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
@@ -32,14 +64,14 @@
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">
             <objects>
-                <controller id="4sK-HA-Art" customClass="NotificationController" customModuleProvider="target"/>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="BatteryWatchSK_WatchKit_App" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="468" y="643"/>
         </scene>
         <!--Notification Controller-->
         <scene sceneID="Niz-AI-uX2">
             <objects>
-                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModuleProvider="target"/>
+                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="BatteryWatchSK_WatchKit_App" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="468" y="345"/>
         </scene>

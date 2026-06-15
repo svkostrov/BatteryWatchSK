@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,9 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        
+        let icon = UIApplicationShortcutIcon(type: .cloud)
+         //let item = UIApplicationShortcutItem(type: "com.yoursite.yourapp.adduser", localizedTitle: Model.shared.iphoneCurrentBattery(), localizedSubtitle: Model.shared.LastAW, icon: icon , userInfo: nil)
+        let item = UIApplicationShortcutItem(type: "com.yoursite.yourapp.adduser", localizedTitle: "📱🙂⌚️", localizedSubtitle: Model.shared.LastAW, icon: icon , userInfo: nil)
+        print("ХЕРНЯ ", Model.shared.LastAW)
+        UIApplication.shared.shortcutItems = [item]
+        
         return true
     }
+    
 
     // MARK: UISceneSession Lifecycle
 

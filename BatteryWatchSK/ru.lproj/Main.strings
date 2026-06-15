@@ -1,0 +1,21 @@
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "8fj-uY-79b"; */
+"8fj-uY-79b.normalTitle" = "Назад";
+
+/* Class = "UIButton"; normalTitle = "⌚️Update Sync"; ObjectID = "28y-ZV-Tql"; */
+"28y-ZV-Tql.normalTitle" = "⌚️Update Sync";
+
+/* Class = "UILabel"; text = "Apple Watch supported firmware version: 6.0 or higher.\nSupported IOS version: 13 or higher.\n\nMake sure the application has loaded on your Apple Watch.\n\nSessions establishing between iPhone and Apple Watch takes some time. Session works short time to save battery.\n\n You can add extension to your watchface in to corner. Just customize your clockface and find BatteryWatchSK\n\n If you see:\nSync ❌ - press button 📲Update on your Apple Watch to be Sync ✅\n\nNo active widgets👀 - You have no active extension on your watchface. Just add BatteryWatch extension on your watchface.\n"; ObjectID = "J0O-pt-mNS"; */
+"J0O-pt-mNS.text" = "Поддерживаемая версия ПО Apple Watch: 6.0 или новее.\nПоддерживаемая версия IOS: 13 или новее.\n\nДля корректной работы удостоверьтесь, что приложение полностью загружено и установлено на ваши Apple Watch.\nСинхронизация данных между iPhone и Apple Watch в рамках приложения занимает некоторое время. Для экономии энергии синхронизация данных происходит только когда вы смотрите в приложение на Apple Watch.\nДля удобства вы можете добавить виджет на ваш циферблат. Поддерживаются не все циферблаты.\n\nЕсли вы видите:\nSync ❌ - нажмите кнопку \"📲Update\" в приложении на Apple Watch до появления статуса \"Sync✅\"\nNo active widgets👀 - У вас нет активных виджетов на циферблате. Просто добавьте их в настройках циферблата. \n";
+
+/* Class = "UILabel"; text = "⌛️Sync in progress"; ObjectID = "kIg-Sz-7C3"; */
+"kIg-Sz-7C3.text" = "⌛️Синхронизация...";
+
+/* Class = "UIButton"; normalTitle = "Help❓"; ObjectID = "L0b-cS-omN"; */
+"L0b-cS-omN.normalTitle" = "Помощь❓";
+
+/* Class = "UILabel"; text = "📱iPhone power level"; ObjectID = "l4E-4j-gL2"; */
+"l4E-4j-gL2.text" = "📱Уровень заряда на iPhone";
+
+/* Class = "UILabel"; text = "Debug"; ObjectID = "xmS-pV-dgZ"; */
+"xmS-pV-dgZ.text" = "Debug";
+

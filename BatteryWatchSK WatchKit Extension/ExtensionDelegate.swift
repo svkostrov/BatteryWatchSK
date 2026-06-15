@@ -7,50 +7,105 @@
 //
 
 import WatchKit
+import WatchConnectivity
+import ClockKit
 
-class ExtensionDelegate: NSObject, WKExtensionDelegate {
+class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
 
     func applicationDidFinishLaunching() {
-        // Perform any final initialization of your application.
+        // Запускаем WCSession на уровне ExtensionDelegate — это позволяет
+        // получать обновления от iPhone даже когда Watch-приложение закрыто,
+        // что критично для обновления complications в фоне.
+        if WCSession.isSupported() {
+            let session = WCSession.default
+            session.delegate = self
+            session.activate()
+        }
     }
 
-    func applicationDidBecomeActive() {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    func applicationDidBecomeActive() { }
+
+    func applicationWillResignActive() { }
+
+    // MARK: - WCSession Delegate
+
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) { }
+
+    /// Получение application context от iPhone — работает в фоне, идеально для complications.
+    /// iPhone вызывает updateApplicationContext, Watch получает его даже когда оба приложения закрыты.
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
+        if let batteryLevel = applicationContext["iPhoneBattery"] as? Float {
+            Model.shared.iPhoneBattery = batteryLevel
+        }
+        if let batteryString = applicationContext["iPhoneBatteryString"] as? String {
+            Model.shared.iPhoneBatteryString = batteryString
+        }
+        DispatchQueue.main.async {
+            self.reloadComplications()
+        }
     }
 
-    func applicationWillResignActive() {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, etc.
+    /// Получение прямого сообщения от iPhone (когда оба приложения активны).
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+        if let batteryLevel = message["iPhoneBattery"] as? Float {
+            Model.shared.iPhoneBattery = batteryLevel
+        }
+        if let batteryString = message["iPhoneBatteryString"] as? String {
+            Model.shared.iPhoneBatteryString = batteryString
+        }
+        DispatchQueue.main.async {
+            self.reloadComplications()
+        }
     }
 
-    func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
-        // Sent when the system needs to launch the application in the background to process tasks. Tasks arrive in a set, so loop through and process each one.
-        for task in backgroundTasks {
-            // Use a switch statement to check the task type
-            switch task {
-            case let backgroundTask as WKApplicationRefreshBackgroundTask:
-                // Be sure to complete the background task once you’re done.
-                backgroundTask.setTaskCompletedWithSnapshot(false)
-            case let snapshotTask as WKSnapshotRefreshBackgroundTask:
-                // Snapshot tasks have a unique completion call, make sure to set your expiration date
-                snapshotTask.setTaskCompleted(restoredDefaultState: true, estimatedSnapshotExpiration: Date.distantFuture, userInfo: nil)
-            case let connectivityTask as WKWatchConnectivityRefreshBackgroundTask:
-                // Be sure to complete the connectivity task once you’re done.
-                connectivityTask.setTaskCompletedWithSnapshot(false)
-            case let urlSessionTask as WKURLSessionRefreshBackgroundTask:
-                // Be sure to complete the URL session task once you’re done.
-                urlSessionTask.setTaskCompletedWithSnapshot(false)
-            case let relevantShortcutTask as WKRelevantShortcutRefreshBackgroundTask:
-                // Be sure to complete the relevant-shortcut task once you're done.
-                relevantShortcutTask.setTaskCompletedWithSnapshot(false)
-            case let intentDidRunTask as WKIntentDidRunRefreshBackgroundTask:
-                // Be sure to complete the intent-did-run task once you're done.
-                intentDidRunTask.setTaskCompletedWithSnapshot(false)
-            default:
-                // make sure to complete unhandled task types
-                task.setTaskCompletedWithSnapshot(false)
+    // MARK: - Complications
+
+    func reloadComplications() {
+        if let complications = CLKComplicationServer.sharedInstance().activeComplications {
+            for complication in complications {
+                CLKComplicationServer.sharedInstance().reloadTimeline(for: complication)
+                print("🔄 Complication reloaded: \(complication.family)")
             }
         }
     }
 
+    // MARK: - Background Tasks
+
+    func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
+        for task in backgroundTasks {
+            switch task {
+            case let backgroundTask as WKApplicationRefreshBackgroundTask:
+                // Перезагружаем complications при каждом фоновом обновлении
+                reloadComplications()
+                // Планируем следующее обновление через 15 минут
+                let nextRefresh = Date().addingTimeInterval(15 * 60)
+                WKExtension.shared().scheduleBackgroundRefresh(
+                    withPreferredDate: nextRefresh,
+                    userInfo: nil
+                ) { error in
+                    if let error = error {
+                        print("⚠️ Background refresh schedule error: \(error)")
+                    }
+                }
+                backgroundTask.setTaskCompletedWithSnapshot(false)
+
+            case let snapshotTask as WKSnapshotRefreshBackgroundTask:
+                snapshotTask.setTaskCompleted(
+                    restoredDefaultState: true,
+                    estimatedSnapshotExpiration: Date.distantFuture,
+                    userInfo: nil
+                )
+            case let connectivityTask as WKWatchConnectivityRefreshBackgroundTask:
+                connectivityTask.setTaskCompletedWithSnapshot(false)
+            case let urlSessionTask as WKURLSessionRefreshBackgroundTask:
+                urlSessionTask.setTaskCompletedWithSnapshot(false)
+            case let relevantShortcutTask as WKRelevantShortcutRefreshBackgroundTask:
+                relevantShortcutTask.setTaskCompletedWithSnapshot(false)
+            case let intentDidRunTask as WKIntentDidRunRefreshBackgroundTask:
+                intentDidRunTask.setTaskCompletedWithSnapshot(false)
+            default:
+                task.setTaskCompletedWithSnapshot(false)
+            }
+        }
+    }
 }

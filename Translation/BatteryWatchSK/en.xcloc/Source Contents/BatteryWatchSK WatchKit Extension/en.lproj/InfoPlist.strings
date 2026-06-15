@@ -1,0 +1,4 @@
+/* Bundle display name */
+"CFBundleDisplayName" = "BatteryWatchSK";
+/* Bundle name */
+"CFBundleName" = "BatteryWatchSK WatchKit Extension";

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="17701" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch44"/>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="17500"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="BatteryWatchSK_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <label width="1" alignment="center" text="📱iPhone level" textAlignment="center" id="Rf0-6h-p5u"/>
+                        <label width="1" alignment="center" text="⌚️AW level" textAlignment="center" id="QLM-CG-daK"/>
+                        <label width="1" alignment="center" text="⌛️Sync in progress" textAlignment="center" minimumScaleFactor="0.69999999999999996" id="sXQ-90-Ysm"/>
+                        <label width="136" height="20" alignment="left" hidden="YES" text="Debug" textAlignment="center" id="A9h-2w-hZ2">
+                            <fontDescription key="font" type="system" pointSize="7"/>
+                        </label>
+                        <label width="132" alignment="left" text="Don't worry!" textAlignment="center" id="OBO-TE-kYU">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </label>
+                        <label width="136" alignment="left" text="Be happy!" textAlignment="center" id="3xt-g4-B8V">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </label>
+                        <button width="1" height="53" alignment="center" title="📲Update" id="hZM-Xj-aAV">
+                            <connections>
+                                <action selector="hideWelcomeText" destination="AgC-eL-Hgc" id="yy0-Vc-7mJ"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="debugLabel" destination="A9h-2w-hZ2" id="bjY-bF-JdH"/>
+                        <outlet property="hideButton" destination="hZM-Xj-aAV" id="6Pc-0V-m1K"/>
+                        <outlet property="l2" destination="sXQ-90-Ysm" id="5TF-Fy-cEB"/>
+                        <outlet property="labAW" destination="QLM-CG-daK" id="Rsj-km-j7J"/>
+                        <outlet property="welcomeText" destination="Rf0-6h-p5u" id="8t5-ge-0Cc"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="219.52173913043478" y="344.55357142857144"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" numberOfLines="0" id="IdU-wH-bcW"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
+                        <segue destination="4sK-HA-Art" kind="relationship" relationship="dynamicNotificationInterface" id="kXh-Jw-8B1"/>
+                        <segue destination="eXb-UN-Cd0" kind="relationship" relationship="dynamicInteractiveNotificationInterface" id="mpB-YA-K8N"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="220" y="643"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="ZPc-GJ-vnh">
+            <objects>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="BatteryWatchSK_WatchKit_App" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="468" y="643"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="Niz-AI-uX2">
+            <objects>
+                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="BatteryWatchSK_WatchKit_App" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="468" y="345"/>
+        </scene>
+    </scenes>
+</document>

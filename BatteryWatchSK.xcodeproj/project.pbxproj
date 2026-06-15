@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14CE91E0BFF165F553219362 /* Pods_BatteryWatchSK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1ABB9B37FB80C7299D9C2F /* Pods_BatteryWatchSK.framework */; };
 		170FCC92235D05BF00180AD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FCC91235D05BF00180AD9 /* AppDelegate.swift */; };
 		170FCC94235D05BF00180AD9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FCC93235D05BF00180AD9 /* SceneDelegate.swift */; };
 		170FCC96235D05BF00180AD9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FCC95235D05BF00180AD9 /* ViewController.swift */; };
@@ -22,6 +23,14 @@
 		170FCCBB235D05C300180AD9 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FCCBA235D05C300180AD9 /* NotificationController.swift */; };
 		170FCCBD235D05C300180AD9 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FCCBC235D05C300180AD9 /* ComplicationController.swift */; };
 		170FCCBF235D05C500180AD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 170FCCBE235D05C500180AD9 /* Assets.xcassets */; };
+		1718535F2375A7E40058777F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718535E2375A7E40058777F /* Model.swift */; };
+		178877F7235F444E009457DB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178877F6235F444E009457DB /* Model.swift */; };
+		17BE8543236C801E00B0189E /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17BE853B236C801200B0189E /* GoogleUtilities.framework */; };
+		17BE8544236C801E00B0189E /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17BE853C236C801700B0189E /* GoogleMobileAds.framework */; };
+		17BE8545236C801E00B0189E /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17BE853D236C801B00B0189E /* GoogleAppMeasurement.framework */; };
+		17BE8546236C801E00B0189E /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17BE8542236C801E00B0189E /* nanopb.framework */; };
+		CE4A264B258CAE1500D3F200 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE4A2649258CAE1500D3F200 /* Localizable.strings */; };
+		CE576D0025DDA93B001564BA /* ViewControllerHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE576CFF25DDA93B001564BA /* ViewControllerHelp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +73,16 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		17BE8541236C801D00B0189E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +106,18 @@
 		170FCCBE235D05C500180AD9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		170FCCC0235D05C500180AD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		170FCCC1235D05C500180AD9 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		1718535E2375A7E40058777F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		178877F6235F444E009457DB /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		17BE853B236C801200B0189E /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = "<group>"; };
+		17BE853C236C801700B0189E /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		17BE853D236C801B00B0189E /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAppMeasurement.framework; sourceTree = "<group>"; };
+		17BE8542236C801E00B0189E /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nanopb.framework; sourceTree = "<group>"; };
+		730F30BF0F8F43D58474949B /* Pods-BatteryWatchSK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BatteryWatchSK.release.xcconfig"; path = "Target Support Files/Pods-BatteryWatchSK/Pods-BatteryWatchSK.release.xcconfig"; sourceTree = "<group>"; };
+		AA1ABB9B37FB80C7299D9C2F /* Pods_BatteryWatchSK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BatteryWatchSK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE4A262B258CA46B00D3F200 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		CE4A264A258CAE1500D3F200 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CE576CFF25DDA93B001564BA /* ViewControllerHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerHelp.swift; sourceTree = "<group>"; };
+		F1434E3B37985A27367ABAED /* Pods-BatteryWatchSK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BatteryWatchSK.debug.xcconfig"; path = "Target Support Files/Pods-BatteryWatchSK/Pods-BatteryWatchSK.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +125,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17BE8543236C801E00B0189E /* GoogleUtilities.framework in Frameworks */,
+				17BE8545236C801E00B0189E /* GoogleAppMeasurement.framework in Frameworks */,
+				17BE8544236C801E00B0189E /* GoogleMobileAds.framework in Frameworks */,
+				17BE8546236C801E00B0189E /* nanopb.framework in Frameworks */,
+				14CE91E0BFF165F553219362 /* Pods_BatteryWatchSK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,9 +140,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		252B119E11E18125D95D12CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00EB0D14244991EB5B381BC1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				17BE853D236C801B00B0189E /* GoogleAppMeasurement.framework */,
+				17BE853C236C801700B0189E /* GoogleMobileAds.framework */,
+				17BE853B236C801200B0189E /* GoogleUtilities.framework */,
+				17BE8542236C801E00B0189E /* nanopb.framework */,
+				AA1ABB9B37FB80C7299D9C2F /* Pods_BatteryWatchSK.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		170FCC85235D05BF00180AD9 = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +169,8 @@
 				170FCCA6235D05C200180AD9 /* BatteryWatchSK WatchKit App */,
 				170FCCB5235D05C300180AD9 /* BatteryWatchSK WatchKit Extension */,
 				170FCC8F235D05BF00180AD9 /* Products */,
+				FDD39ADEBBF5E31A795C4A96 /* Pods */,
+				00EB0D14244991EB5B381BC1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,12 +188,15 @@
 			isa = PBXGroup;
 			children = (
 				170FCC91235D05BF00180AD9 /* AppDelegate.swift */,
+				1718535E2375A7E40058777F /* Model.swift */,
 				170FCC93235D05BF00180AD9 /* SceneDelegate.swift */,
 				170FCC95235D05BF00180AD9 /* ViewController.swift */,
+				CE576CFF25DDA93B001564BA /* ViewControllerHelp.swift */,
 				170FCC97235D05BF00180AD9 /* Main.storyboard */,
 				170FCC9A235D05C100180AD9 /* Assets.xcassets */,
 				170FCC9C235D05C100180AD9 /* LaunchScreen.storyboard */,
 				170FCC9F235D05C100180AD9 /* Info.plist */,
+				CE4A2649258CAE1500D3F200 /* Localizable.strings */,
 			);
 			path = BatteryWatchSK;
 			sourceTree = "<group>";
@@ -155,14 +215,24 @@
 			isa = PBXGroup;
 			children = (
 				170FCCB6235D05C300180AD9 /* InterfaceController.swift */,
+				178877F6235F444E009457DB /* Model.swift */,
+				170FCCBC235D05C300180AD9 /* ComplicationController.swift */,
 				170FCCB8235D05C300180AD9 /* ExtensionDelegate.swift */,
 				170FCCBA235D05C300180AD9 /* NotificationController.swift */,
-				170FCCBC235D05C300180AD9 /* ComplicationController.swift */,
 				170FCCBE235D05C500180AD9 /* Assets.xcassets */,
 				170FCCC0235D05C500180AD9 /* Info.plist */,
 				170FCCC1235D05C500180AD9 /* PushNotificationPayload.apns */,
 			);
 			path = "BatteryWatchSK WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		FDD39ADEBBF5E31A795C4A96 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F1434E3B37985A27367ABAED /* Pods-BatteryWatchSK.debug.xcconfig */,
+				730F30BF0F8F43D58474949B /* Pods-BatteryWatchSK.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,10 +242,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 170FCCCC235D05C500180AD9 /* Build configuration list for PBXNativeTarget "BatteryWatchSK" */;
 			buildPhases = (
+				8888383C5988B3ED26B5C6B1 /* [CP] Check Pods Manifest.lock */,
 				170FCC8A235D05BF00180AD9 /* Sources */,
 				170FCC8B235D05BF00180AD9 /* Frameworks */,
 				170FCC8C235D05BF00180AD9 /* Resources */,
 				170FCCCB235D05C500180AD9 /* Embed Watch Content */,
+				F5783729C962E62ABAE46A3A /* [CP] Embed Pods Frameworks */,
+				17BE8541236C801D00B0189E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -193,6 +266,7 @@
 			buildPhases = (
 				170FCCA0235D05C200180AD9 /* Resources */,
 				170FCCC7235D05C500180AD9 /* Embed App Extensions */,
+				252B119E11E18125D95D12CB /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -228,7 +302,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1110;
-				LastUpgradeCheck = 1110;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Сергей Костров";
 				TargetAttributes = {
 					170FCC8D235D05BF00180AD9 = {
@@ -249,6 +323,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 170FCC85235D05BF00180AD9;
 			productRefGroup = 170FCC8F235D05BF00180AD9 /* Products */;
@@ -268,6 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				170FCC9E235D05C100180AD9 /* LaunchScreen.storyboard in Resources */,
+				CE4A264B258CAE1500D3F200 /* Localizable.strings in Resources */,
 				170FCC9B235D05C100180AD9 /* Assets.xcassets in Resources */,
 				170FCC99235D05BF00180AD9 /* Main.storyboard in Resources */,
 			);
@@ -292,6 +368,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8888383C5988B3ED26B5C6B1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BatteryWatchSK-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F5783729C962E62ABAE46A3A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BatteryWatchSK/Pods-BatteryWatchSK-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BatteryWatchSK/Pods-BatteryWatchSK-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BatteryWatchSK/Pods-BatteryWatchSK-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		170FCC8A235D05BF00180AD9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -300,6 +418,8 @@
 				170FCC96235D05BF00180AD9 /* ViewController.swift in Sources */,
 				170FCC92235D05BF00180AD9 /* AppDelegate.swift in Sources */,
 				170FCC94235D05BF00180AD9 /* SceneDelegate.swift in Sources */,
+				1718535F2375A7E40058777F /* Model.swift in Sources */,
+				CE576D0025DDA93B001564BA /* ViewControllerHelp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +427,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				178877F7235F444E009457DB /* Model.swift in Sources */,
 				170FCCBB235D05C300180AD9 /* NotificationController.swift in Sources */,
 				170FCCBD235D05C300180AD9 /* ComplicationController.swift in Sources */,
 				170FCCB9235D05C300180AD9 /* ExtensionDelegate.swift in Sources */,
@@ -334,6 +455,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				170FCC98235D05BF00180AD9 /* Base */,
+				CE4A262B258CA46B00D3F200 /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -354,6 +476,14 @@
 			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
+		CE4A2649258CAE1500D3F200 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE4A264A258CAE1500D3F200 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -361,6 +491,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -383,6 +514,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -407,10 +539,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -421,6 +554,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -443,6 +577,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -461,9 +596,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -476,6 +612,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 85UAW96Q68;
 				INFOPLIST_FILE = "BatteryWatchSK WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -483,6 +620,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rokot.BatteryWatchSK.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -498,6 +636,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 85UAW96Q68;
 				INFOPLIST_FILE = "BatteryWatchSK WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -505,6 +644,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rokot.BatteryWatchSK.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -521,9 +661,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 85UAW96Q68;
 				IBSC_MODULE = BatteryWatchSK_WatchKit_Extension;
 				INFOPLIST_FILE = "BatteryWatchSK WatchKit App/Info.plist";
+				MARKETING_VERSION = 2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rokot.BatteryWatchSK.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -540,9 +682,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 85UAW96Q68;
 				IBSC_MODULE = BatteryWatchSK_WatchKit_Extension;
 				INFOPLIST_FILE = "BatteryWatchSK WatchKit App/Info.plist";
+				MARKETING_VERSION = 2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rokot.BatteryWatchSK.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -555,37 +699,55 @@
 		};
 		170FCCCD235D05C500180AD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F1434E3B37985A27367ABAED /* Pods-BatteryWatchSK.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 85UAW96Q68;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BatteryWatchSK/Licenses",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = BatteryWatchSK/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.6;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rokot.BatteryWatchSK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		170FCCCE235D05C500180AD9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 730F30BF0F8F43D58474949B /* Pods-BatteryWatchSK.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 85UAW96Q68;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BatteryWatchSK/Licenses",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = BatteryWatchSK/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.6;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rokot.BatteryWatchSK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
