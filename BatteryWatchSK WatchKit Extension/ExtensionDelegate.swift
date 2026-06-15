@@ -30,7 +30,11 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
         }
     }
 
-    func applicationDidBecomeActive() { }
+    func applicationDidBecomeActive() {
+        // Перезагружаем complications при каждой активации — на случай если данные
+        // уже есть в UserDefaults (от предыдущего сеанса), но timeline устарел.
+        DispatchQueue.main.async { self.reloadComplications() }
+    }
 
     func applicationWillResignActive() { }
 

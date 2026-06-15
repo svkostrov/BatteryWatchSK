@@ -12,22 +12,29 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     // MARK: - Helpers
 
-    /// Цвет индикатора по уровню заряда.
-    /// Примечание: systemRed/systemYellow недоступны в watchOS — используем базовые UIColor.
-    private func batteryColor(for level: Float) -> UIColor {
-        if level > 0.5 { return .green }
-        if level > 0.2 { return UIColor(red: 1.0, green: 0.8, blue: 0.0, alpha: 1.0) }
-        return .red
-    }
-
     private func batteryText() -> String {
         guard Model.shared.hasIPhoneData else { return "--" }
         return "\(Int(Model.shared.iPhoneBattery * 100))%"
     }
 
     private func batteryFill() -> Float {
-        guard Model.shared.hasIPhoneData else { return 0.5 }
+        guard Model.shared.hasIPhoneData else { return 0.0 }
         return max(0.0, min(1.0, Model.shared.iPhoneBattery))
+    }
+
+    /// Цветная шкала заряда — красный < 20%, жёлтый 20–50%, зелёный > 50%.
+    /// Используем базовые UIColor (systemRed/systemYellow недоступны в watchOS).
+    private func makeGaugeProvider(fill: Float) -> CLKSimpleGaugeProvider {
+        return CLKSimpleGaugeProvider(
+            style: .fill,
+            gaugeColors: [
+                .red,
+                UIColor(red: 1.0, green: 0.8, blue: 0.0, alpha: 1.0),  // yellow
+                .green
+            ],
+            gaugeColorLocations: [0.0, 0.2, 0.5] as [NSNumber],
+            fillFraction: fill
+        )
     }
 
     // MARK: - Timeline Configuration
@@ -76,32 +83,56 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     // MARK: - Template Factory
 
-    /// Единая фабрика шаблонов.
     /// sampleMode=true — показывать 85% в превью настроек циферблата.
     private func makeEntry(for family: CLKComplicationFamily, sampleMode: Bool) -> CLKComplicationTimelineEntry? {
-        let text  = sampleMode ? "85%" : batteryText()
-        let fill  = sampleMode ? Float(0.85) : batteryFill()
-        let color = sampleMode ? UIColor.green : batteryColor(for: Model.shared.iPhoneBattery)
+        let text = sampleMode ? "85%" : batteryText()
+        let fill = sampleMode ? Float(0.85) : batteryFill()
 
         let template: CLKComplicationTemplate
 
         switch family {
 
+        // ─────────────────────────────────────────────────────────────────
+        // Graphic families (watchOS 6+) — лучшее визуальное представление
+        // ─────────────────────────────────────────────────────────────────
+
         case .graphicCircular:
-            template = CLKComplicationTemplateGraphicCircularStackText(
-                line1TextProvider: CLKSimpleTextProvider(text: "📱"),
-                line2TextProvider: CLKSimpleTextProvider(text: text)
+            // Кольцо-индикатор заряда + % в центре + 📱 внизу.
+            // Именно этот шаблон даёт "живое" кольцо как у Activity Rings (число "76" на скриншоте).
+            template = CLKComplicationTemplateGraphicCircularOpenGaugeSimpleText(
+                gaugeProvider: makeGaugeProvider(fill: fill),
+                bottomTextProvider: CLKSimpleTextProvider(text: "📱"),
+                centerTextProvider: CLKSimpleTextProvider(text: text)
+            )
+
+        case .graphicCorner:
+            // Угловые слоты на Wayfinder/Ultra — дуга-индикатор с текстом.
+            template = CLKComplicationTemplateGraphicCornerGaugeText(
+                gaugeProvider: makeGaugeProvider(fill: fill),
+                outerTextProvider: CLKSimpleTextProvider(text: "📱 \(text)")
             )
 
         case .graphicBezel:
-            let inner = CLKComplicationTemplateGraphicCircularStackText(
-                line1TextProvider: CLKSimpleTextProvider(text: "📱"),
-                line2TextProvider: CLKSimpleTextProvider(text: text)
+            let inner = CLKComplicationTemplateGraphicCircularOpenGaugeSimpleText(
+                gaugeProvider: makeGaugeProvider(fill: fill),
+                bottomTextProvider: CLKSimpleTextProvider(text: "📱"),
+                centerTextProvider: CLKSimpleTextProvider(text: text)
             )
             template = CLKComplicationTemplateGraphicBezelCircularText(
                 circularTemplate: inner,
                 textProvider: CLKSimpleTextProvider(text: "iPhone Battery")
             )
+
+        case .graphicRectangular:
+            template = CLKComplicationTemplateGraphicRectangularStandardBody(
+                headerTextProvider: CLKSimpleTextProvider(text: "📱 iPhone Battery"),
+                body1TextProvider: CLKSimpleTextProvider(text: text),
+                body2TextProvider: CLKSimpleTextProvider(text: "")
+            )
+
+        // ─────────────────────────────────────────────────────────────────
+        // Classic families
+        // ─────────────────────────────────────────────────────────────────
 
         case .extraLarge:
             let t = CLKComplicationTemplateExtraLargeRingText(
@@ -109,7 +140,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 fillFraction: fill,
                 ringStyle: .closed
             )
-            t.tintColor = color
+            t.tintColor = fill > 0.5 ? .green : fill > 0.2 ? UIColor(red: 1.0, green: 0.8, blue: 0.0, alpha: 1.0) : .red
             template = t
 
         case .utilitarianSmall:
@@ -118,25 +149,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 fillFraction: fill,
                 ringStyle: .closed
             )
-            t.tintColor = color
-            template = t
-
-        case .modularSmall:
-            let t = CLKComplicationTemplateModularSmallRingText(
-                textProvider: CLKSimpleTextProvider(text: text),
-                fillFraction: fill,
-                ringStyle: .closed
-            )
-            t.tintColor = color
-            template = t
-
-        case .circularSmall:
-            let t = CLKComplicationTemplateCircularSmallRingText(
-                textProvider: CLKSimpleTextProvider(text: text),
-                fillFraction: fill,
-                ringStyle: .closed
-            )
-            t.tintColor = color
+            t.tintColor = fill > 0.5 ? .green : fill > 0.2 ? UIColor(red: 1.0, green: 0.8, blue: 0.0, alpha: 1.0) : .red
             template = t
 
         case .utilitarianLarge:
@@ -144,14 +157,30 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 textProvider: CLKSimpleTextProvider(text: "📱 iPhone: \(text)")
             )
 
+        case .modularSmall:
+            let t = CLKComplicationTemplateModularSmallRingText(
+                textProvider: CLKSimpleTextProvider(text: text),
+                fillFraction: fill,
+                ringStyle: .closed
+            )
+            t.tintColor = fill > 0.5 ? .green : fill > 0.2 ? UIColor(red: 1.0, green: 0.8, blue: 0.0, alpha: 1.0) : .red
+            template = t
+
         case .modularLarge:
             template = CLKComplicationTemplateModularLargeStandardBody(
                 headerTextProvider: CLKSimpleTextProvider(text: "📱 iPhone Battery"),
                 body1TextProvider: CLKSimpleTextProvider(text: text),
-                body2TextProvider: CLKSimpleTextProvider(
-                    text: sampleMode ? "📱iPhone: 85%🔋" : Model.shared.iPhoneBatteryString
-                )
+                body2TextProvider: CLKSimpleTextProvider(text: "")
             )
+
+        case .circularSmall:
+            let t = CLKComplicationTemplateCircularSmallRingText(
+                textProvider: CLKSimpleTextProvider(text: text),
+                fillFraction: fill,
+                ringStyle: .closed
+            )
+            t.tintColor = fill > 0.5 ? .green : fill > 0.2 ? UIColor(red: 1.0, green: 0.8, blue: 0.0, alpha: 1.0) : .red
+            template = t
 
         default:
             return nil

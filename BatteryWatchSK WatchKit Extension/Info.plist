@@ -24,10 +24,14 @@
 	<string>$(PRODUCT_MODULE_NAME).ComplicationController</string>
 	<key>CLKComplicationSupportedFamilies</key>
 	<array>
-		<string>CLKComplicationFamilyGraphicBezel</string>
+		<string>CLKComplicationFamilyGraphicCorner</string>
 		<string>CLKComplicationFamilyGraphicCircular</string>
+		<string>CLKComplicationFamilyGraphicBezel</string>
+		<string>CLKComplicationFamilyGraphicRectangular</string>
 		<string>CLKComplicationFamilyExtraLarge</string>
+		<string>CLKComplicationFamilyModularLarge</string>
 		<string>CLKComplicationFamilyModularSmall</string>
+		<string>CLKComplicationFamilyUtilitarianLarge</string>
 		<string>CLKComplicationFamilyUtilitarianSmall</string>
 		<string>CLKComplicationFamilyCircularSmall</string>
 	</array>
