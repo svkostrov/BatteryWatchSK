@@ -104,6 +104,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     private func makeEntry(for family: CLKComplicationFamily, sampleMode: Bool) -> CLKComplicationTimelineEntry? {
         let text = sampleMode ? "85%" : batteryText()
         let fill = sampleMode ? Float(0.85) : batteryFill()
+        // Короткий вариант без % — для узких слотов (кольцо уже показывает уровень визуально)
+        let shortText = sampleMode ? "85" : (Model.shared.hasIPhoneData ? "\(Int(Model.shared.iPhoneBattery * 100))" : "--")
 
         let template: CLKComplicationTemplate
 
@@ -114,26 +116,25 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         // ─────────────────────────────────────────────────────────────────
 
         case .graphicCircular:
-            // Кольцо-индикатор заряда + % в центре + 📱 внизу.
-            // Именно этот шаблон даёт "живое" кольцо как у Activity Rings (число "76" на скриншоте).
+            // Число в центре + "%" внизу (без emoji — они плохо рендерятся в маленьких слотах).
             template = CLKComplicationTemplateGraphicCircularOpenGaugeSimpleText(
                 gaugeProvider: makeGaugeProvider(fill: fill),
-                bottomTextProvider: CLKSimpleTextProvider(text: "📱"),
-                centerTextProvider: CLKSimpleTextProvider(text: text)
+                bottomTextProvider: CLKSimpleTextProvider(text: "%"),
+                centerTextProvider: CLKSimpleTextProvider(text: shortText)
             )
 
         case .graphicCorner:
-            // Угловые слоты на Wayfinder/Ultra — дуга-индикатор с текстом.
+            // Угловые слоты на Wayfinder/Ultra — без emoji, только данные.
             template = CLKComplicationTemplateGraphicCornerGaugeText(
                 gaugeProvider: makeGaugeProvider(fill: fill),
-                outerTextProvider: CLKSimpleTextProvider(text: "📱 \(text)")
+                outerTextProvider: CLKSimpleTextProvider(text: text)
             )
 
         case .graphicBezel:
             let inner = CLKComplicationTemplateGraphicCircularOpenGaugeSimpleText(
                 gaugeProvider: makeGaugeProvider(fill: fill),
-                bottomTextProvider: CLKSimpleTextProvider(text: "📱"),
-                centerTextProvider: CLKSimpleTextProvider(text: text)
+                bottomTextProvider: CLKSimpleTextProvider(text: "%"),
+                centerTextProvider: CLKSimpleTextProvider(text: shortText)
             )
             template = CLKComplicationTemplateGraphicBezelCircularText(
                 circularTemplate: inner,
